@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Ishita ❤️</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #fff0f5; /* Lavender Blush */
+            overflow-x: hidden;
+        }
+        h1, h2, .handwriting {
+            font-family: 'Pacifico', cursive;
+        }
+        
+        /* Floating Hearts Animation Background */
+        .heart-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .heart-particle {
+            position: absolute;
+            bottom: -20px;
+            animation: floatUp 15s linear infinite;
+            opacity: 0.6;
+            color: #ffb7c5;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Pulse Animation */
+        .pulse-heart {
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Card Hover Effects */
+        .love-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .love-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 105, 180, 0.3);
+        }
+
+        /* Coupon Scratch Effect */
+        .coupon {
+            background: repeating-linear-gradient(
+                45deg,
+                #fff,
+                #fff 10px,
+                #ffe4e1 10px,
+                #ffe4e1 20px
+            );
+        }
+        
+        .hidden-msg {
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease-in;
+        }
+        .show-msg {
+            display: block;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="text-gray-700 relative">
+
+    <!-- Floating Background Hearts -->
+    <div class="heart-bg" id="heartContainer"></div>
+
+    <!-- Main Content -->
+    <div class="relative z-10 min-h-screen flex flex-col items-center">
+        
+        <!-- Hero Section -->
+        <header class="text-center mt-12 mb-8 px-4">
+            <div class="inline-block p-4 rounded-full bg-white shadow-lg mb-4 pulse-heart">
+                <i class="fas fa-heart text-5xl text-rose-500"></i>
+            </div>
+            <h1 class="text-5xl md:text-7xl text-rose-500 mb-2 drop-shadow-sm">Hey Ishita!</h1>
+            <p class="text-xl text-rose-400 font-semibold tracking-wide">Welcome to your personal corner of the internet ✨</p>
+        </header>
+
+        <!-- The Button -->
+        <div class="mb-16 text-center">
+            <button onclick="rainLove()" class="bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition hover:scale-105 active:scale-95 text-lg">
+                <i class="fas fa-magic mr-2"></i> Press for Magic
+            </button>
+            <p class="text-sm text-gray-500 mt-2">( Warning: Extreme cheesiness ahead )</p>
+        </div>
+
+        <!-- 3 Reasons Why -->
+        <section class="max-w-4xl w-full px-6 mb-16">
+            <h2 class="text-3xl text-center text-rose-600 mb-8">Why You're Special</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Reason 1 -->
+                <div class="love-card bg-white p-6 rounded-2xl shadow-md text-center border-t-4 border-rose-300">
+                    <div class="text-4xl mb-4">🥰</div>
+                    <h3 class="font-bold text-xl mb-2 text-rose-500">Your Smile</h3>
+                    <p class="text-gray-600">It literally lights up my entire day. Even when I'm grumpy, one smile from you fixes everything.</p>
+                </div>
+                <!-- Reason 2 -->
+                <div class="love-card bg-white p-6 rounded-2xl shadow-md text-center border-t-4 border-rose-300">
+                    <div class="text-4xl mb-4">🧠</div>
+                    <h3 class="font-bold text-xl mb-2 text-rose-500">Your Mind</h3>
+                    <p class="text-gray-600">I love how smart you are, how you think, and how you challenge me to be better.</p>
+                </div>
+                <!-- Reason 3 -->
+                <div class="love-card bg-white p-6 rounded-2xl shadow-md text-center border-t-4 border-rose-300">
+                    <div class="text-4xl mb-4">💖</div>
+                    <h3 class="font-bold text-xl mb-2 text-rose-500">Just Being You</h3>
+                    <p class="text-gray-600">There is nobody else like Ishita. You are my favorite person in the whole world.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Love Calculator -->
+        <section class="bg-white w-full py-12 px-4 shadow-inner mb-16">
+            <div class="max-w-md mx-auto text-center">
+                <h2 class="text-3xl text-rose-600 mb-6">Scientific Love Calculator 🧪</h2>
+                <div class="bg-rose-50 p-6 rounded-xl border border-rose-100">
+                    <p class="mb-4 font-semibold">Analyzing compatibility between Us...</p>
+                    <div class="w-full bg-gray-200 rounded-full h-6 mb-4 overflow-hidden relative">
+                        <div id="loveBar" class="bg-gradient-to-r from-rose-400 to-rose-600 h-6 rounded-full transition-all duration-1000 ease-out" style="width: 0%"></div>
+                    </div>
+                    <p id="loveResult" class="text-2xl font-bold text-rose-600 opacity-0 transition-opacity">0%</p>
+                    <button onclick="calculateLove()" class="mt-4 bg-white border-2 border-rose-500 text-rose-500 hover:bg-rose-50 font-bold py-2 px-6 rounded-full transition">
+                        Run Calculation
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Love Coupons -->
+        <section class="max-w-4xl w-full px-6 mb-20">
+            <h2 class="text-3xl text-center text-rose-600 mb-8">Redeemable Coupons</h2>
+            <p class="text-center text-gray-500 mb-8 -mt-6">Valid forever. Non-transferable. 😉</p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Coupon 1 -->
+                <div class="coupon relative border-2 border-dashed border-rose-300 rounded-lg p-1 shadow-sm overflow-hidden group cursor-pointer" onclick="redeemCoupon(this)">
+                    <div class="bg-white p-6 rounded h-full flex flex-col items-center justify-center text-center relative z-10">
+                        <h3 class="font-bold text-lg text-rose-500 mb-2">🎟️ DINNER DATE</h3>
+                        <p class="text-sm text-gray-600">Valid for one dinner at the place of your choice. I pay, I drive, you eat.</p>
+                        <div class="mt-4 text-xs font-bold text-green-500 opacity-0 group-active:opacity-100 transition-opacity">REDEEMED!</div>
+                    </div>
+                </div>
+
+                <!-- Coupon 2 -->
+                <div class="coupon relative border-2 border-dashed border-rose-300 rounded-lg p-1 shadow-sm overflow-hidden group cursor-pointer" onclick="redeemCoupon(this)">
+                    <div class="bg-white p-6 rounded h-full flex flex-col items-center justify-center text-center relative z-10">
+                        <h3 class="font-bold text-lg text-rose-500 mb-2">💆‍♀️ MASSAGE</h3>
+                        <p class="text-sm text-gray-600">Valid for a 20-minute back or foot massage after a long day.</p>
+                        <div class="mt-4 text-xs font-bold text-green-500 opacity-0 group-active:opacity-100 transition-opacity">REDEEMED!</div>
+                    </div>
+                </div>
+
+                <!-- Coupon 3 -->
+                <div class="coupon relative border-2 border-dashed border-rose-300 rounded-lg p-1 shadow-sm overflow-hidden group cursor-pointer" onclick="redeemCoupon(this)">
+                    <div class="bg-white p-6 rounded h-full flex flex-col items-center justify-center text-center relative z-10">
+                        <h3 class="font-bold text-lg text-rose-500 mb-2">🍫 SWEET TREAT</h3>
+                        <p class="text-sm text-gray-600">I will go get you your favorite dessert/chocolate right now.</p>
+                        <div class="mt-4 text-xs font-bold text-green-500 opacity-0 group-active:opacity-100 transition-opacity">REDEEMED!</div>
+                    </div>
+                </div>
+
+                <!-- Coupon 4 -->
+                <div class="coupon relative border-2 border-dashed border-rose-300 rounded-lg p-1 shadow-sm overflow-hidden group cursor-pointer" onclick="redeemCoupon(this)">
+                    <div class="bg-white p-6 rounded h-full flex flex-col items-center justify-center text-center relative z-10">
+                        <h3 class="font-bold text-lg text-rose-500 mb-2">🤫 YOU WIN</h3>
+                        <p class="text-sm text-gray-600">Use this to automatically win one argument. No questions asked.</p>
+                        <div class="mt-4 text-xs font-bold text-green-500 opacity-0 group-active:opacity-100 transition-opacity">REDEEMED!</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final Note -->
+        <footer class="w-full bg-rose-500 text-white py-10 text-center relative overflow-hidden">
+            <div class="relative z-10 px-4">
+                <h2 class="handwriting text-4xl mb-4">I Love You, Ishita!</h2>
+                <p class="text-rose-100 max-w-lg mx-auto">
+                    Just a little reminder that you are loved, appreciated, and adored. <br>
+                    Today, tomorrow, and always.
+                </p>
+                <div class="mt-8 text-2xl animate-bounce">
+                    👇
+                </div>
+                 <button onclick="showSecret()" class="mt-2 text-sm underline text-rose-200 hover:text-white transition">Click for one last secret</button>
+                 <p id="secretMsg" class="hidden-msg mt-4 font-bold text-lg bg-white text-rose-500 inline-block px-4 py-2 rounded-lg transform rotate-[-2deg]">
+                     You are the best girlfriend ever! ❤️
+                 </p>
+            </div>
+            
+            <!-- Decor circles -->
+            <div class="absolute top-0 left-0 w-32 h-32 bg-rose-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+            <div class="absolute top-0 right-0 w-32 h-32 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+        </footer>
+
+    </div>
+
+    <!-- Custom Modal for Magic Button -->
+    <div id="magicModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden transition-opacity duration-300">
+        <div class="bg-white rounded-2xl p-8 max-w-sm mx-4 text-center transform scale-0 transition-transform duration-300" id="modalContent">
+            <div class="text-6xl mb-4">🐻❤️</div>
+            <h3 class="text-2xl font-bold text-rose-600 mb-2">Big Virtual Hug!</h3>
+            <p class="text-gray-600 mb-6">Imagine me giving you the biggest, tightest hug right now.</p>
+            <button onclick="closeModal()" class="bg-rose-500 text-white font-bold py-2 px-6 rounded-full hover:bg-rose-600 transition">Received!</button>
+        </div>
+    </div>
+
+    <script>
+        // Background Hearts Generator
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-particle');
+            heart.innerHTML = '<i class="fas fa-heart"></i>';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 5 + 10) + 's';
+            heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+            
+            document.getElementById('heartContainer').appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 15000);
+        }
+
+        setInterval(createHeart, 500);
+
+        // Magic Button Confetti & Modal
+        function rainLove() {
+            // Show Modal
+            const modal = document.getElementById('magicModal');
+            const content = document.getElementById('modalContent');
+            modal.classList.remove('hidden');
+            
+            // Small delay to allow display:block to apply before scaling
+            setTimeout(() => {
+                content.classList.remove('scale-0');
+                content.classList.add('scale-100');
+            }, 10);
+
+            // Confetti burst (Simple JS implementation)
+            for(let i=0; i<50; i++) {
+                createConfetti();
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('magicModal');
+            const content = document.getElementById('modalContent');
+            
+            content.classList.remove('scale-100');
+            content.classList.add('scale-0');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        function createConfetti() {
+            const colors = ['#ff0000', '#ff69b4', '#ff1493', '#ffd700'];
+            const confetti = document.createElement('div');
+            confetti.style.position = 'fixed';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.top = '-10px';
+            confetti.style.width = '10px';
+            confetti.style.height = '10px';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.zIndex = '100';
+            confetti.style.borderRadius = '50%';
+            document.body.appendChild(confetti);
+
+            const speed = Math.random() * 3 + 2;
+            let top = -10;
+            let angle = 0;
+
+            const fall = setInterval(() => {
+                top += speed;
+                angle += 5;
+                confetti.style.top = top + 'px';
+                confetti.style.transform = `rotate(${angle}deg)`;
+
+                if (top > window.innerHeight) {
+                    clearInterval(fall);
+                    confetti.remove();
+                }
+            }, 20);
+        }
+
+        // Love Calculator Logic
+        function calculateLove() {
+            const bar = document.getElementById('loveBar');
+            const result = document.getElementById('loveResult');
+            
+            // Reset
+            bar.style.width = '0%';
+            result.style.opacity = '0';
+            
+            setTimeout(() => {
+                bar.style.width = '100%';
+                
+                setTimeout(() => {
+                    result.innerText = 'Infinity% (Obviously) 🙄';
+                    result.style.opacity = '1';
+                    
+                    // Trigger confetti again because why not
+                    for(let i=0; i<30; i++) createConfetti();
+                }, 1000);
+            }, 100);
+        }
+
+        // Coupon interaction
+        function redeemCoupon(element) {
+            // Visual feedback handled by CSS active state primarily, 
+            // but let's add a little alert or visual change
+            const text = element.querySelector('.text-green-500');
+            text.style.opacity = '1';
+            setTimeout(() => {
+                text.style.opacity = '0';
+            }, 2000);
+        }
+
+        // Secret Message
+        function showSecret() {
+            document.getElementById('secretMsg').classList.add('show-msg');
+        }
+    </script>
+</body>
+</html>
